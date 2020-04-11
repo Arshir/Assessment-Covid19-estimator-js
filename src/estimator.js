@@ -1,7 +1,7 @@
 const chaOne = require('./challenge1.js');
 
 
-let input = {
+const input = {
   region: {
     name: 'Africa',
     avgAge: 19.7,
@@ -51,7 +51,7 @@ const covid19ImpactEstimator = (data) => {
     }
   };
 
-  ChallengeOne(output);
+  output = ChallengeOne(output);
 
   return output;
 };
