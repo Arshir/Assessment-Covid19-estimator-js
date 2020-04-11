@@ -1,20 +1,5 @@
 const chaOne = require('./challenge1.js');
 
-
-const input = {
-  region: {
-    name: 'Africa',
-    avgAge: 19.7,
-    avgDailyIncomeInUSD: 5,
-    avgDailyIncomePopulation: 0.71
-  },
-  periodType: 'days',
-  timeToElapse: 58,
-  reportedCases: 674,
-  population: 66622705,
-  totalHospitalBeds: 1380614
-};
-
 function ChallengeOne(output) {
   const ImpactCoeft = 10;
   const SevereCoeft = 50;
@@ -22,10 +7,10 @@ function ChallengeOne(output) {
   const cases = output.data.reportedCases;
   // estimate CurrentlyInfected for impact and severeimpact infections
   const impInfected = chaOne.EstCurrentlyInfected(cases, ImpactCoeft);
-  const sevInfected = chaOne.EstCurrentlyInfected(input.reportedCases, SevereCoeft);
+  const sevInfected = chaOne.EstCurrentlyInfected(cases, SevereCoeft);
   // estimate infections by requested time
-  const time = input.period;
-  const timeUnit = input.periodType;
+  const time = output.data.period;
+  const timeUnit = output.data.periodType;
 
   const impInfbyTime = chaOne.EstInfectionsByRequestedTime(impInfected, time, timeUnit);
   const sevInfbyTime = chaOne.EstInfectionsByRequestedTime(sevInfected, time, timeUnit);
@@ -40,11 +25,12 @@ function ChallengeOne(output) {
 // const covid19ImpactEstimator = (data) => data;
 
 const covid19ImpactEstimator = (data) => {
+  const input = data;
   const impact = {};
   const severeImpact = {};
 
   let output = {
-    data,
+    data: input,
     estimate: {
       impact,
       severeImpact
