@@ -1,5 +1,6 @@
 const chaOne = require('./challenge1.js');
 const chaTwo = require('./challenge2.js');
+const chaThree = require('./challenge3.js');
 
 function ChallengeOne(output) {
   const ImpactCoeft = 10;
@@ -47,9 +48,59 @@ function ChallengeTwo(output) {
   output.estimate.severeImpact.SevereCasesByRequestedTime = sevImpSevCsByTime;
   output.estimate.severeImpact.HospitalBedsByRequestedTime = sevImpBedRqTime;
 
-
   return output;
 }
+
+function ChallengeThree(output) {
+  // Percentage measure of severe cases requiring ventilator according to research
+  const ventilatorCasesPercentage = 0.02;
+  // Percentage measure of severe cases requiring intensive care
+  const icuCasesPercentage = 0.05;
+
+  // Get estimated impact InfectionsByRequestedTime
+  const impInfbyTime = output.estimate.impact.InfectionsByRequestedTime;
+  // Get estimated severe-impact InfectionsByRequestedTime
+  const sevImpInfbyTime = output.estimate.severeImpact.InfectionsByRequestedTime;
+  // Get avgDailyIncomeInUSD
+  const avgDailyIncome = output.data.avgDailyIncomeInUSD;
+  // Get avgDailyIncomePopulation
+  const avgDailyIncomePop = output.data.avgDailyIncomePopulation;
+  // Estimate severe cases of infections by requested time requiring icu
+  const impSevCsByTimeVent = chaThree.EstMeasuresOfSevereCasesByRequestedTime(
+    impInfbyTime, ventilatorCasesPercentage
+  );
+  // Estimate severe cases of infections by requested time requiring icu
+  const impSevCsByTimeICU = chaThree.EstMeasuresOfSevereCasesByRequestedTime(
+    impInfbyTime, icuCasesPercentage
+  );
+
+  // Estimate severe cases of infections by requested time requiring icu
+  const sevImpSevCsByTimeVent = chaThree.EstMeasuresOfSevereCasesByRequestedTime(
+    sevImpInfbyTime, ventilatorCasesPercentage
+  );
+  // Estimate severe cases of infections by requested time requiring icu
+  const sevImpSevCsByTimeICU = chaThree.EstMeasuresOfSevereCasesByRequestedTime(
+    sevImpInfbyTime, icuCasesPercentage
+  );
+  // Estimate Dollars Lost by infection impact
+  const impdollarsInFlight = chaThree.EstDollarsInFlightOverRequestedPeriod(
+    impInfbyTime, avgDailyIncomePop, avgDailyIncome
+  );
+
+  // Estimate Dollars Lost by severe infection impact
+  const sevImpdollarsInFlight = chaThree.EstDollarsInFlightOverRequestedPeriod(
+    sevImpInfbyTime, avgDailyIncomePop, avgDailyIncome
+  );
+  // Assign values to output object.
+  output.estimate.impact.casesForICUByRequestedTime = impSevCsByTimeICU;
+  output.estimate.impact.casesForVentilatorsByRequestedTime = impSevCsByTimeVent;
+  output.estimate.impact.dollarsInFlight = impdollarsInFlight;
+  output.estimate.severeImpact.casesForICUByRequestedTime = sevImpSevCsByTimeICU;
+  output.estimate.severeImpact.casesForVentilatorsByRequestedTime = sevImpSevCsByTimeVent;
+  output.estimate.severeImpact.dollarsInFlight = sevImpdollarsInFlight;
+  return output;
+}
+
 // const covid19ImpactEstimator = (data) => data;
 
 const covid19ImpactEstimator = (data) => {
@@ -68,6 +119,8 @@ const covid19ImpactEstimator = (data) => {
   output = ChallengeOne(output);
 
   output = ChallengeTwo(output);
+
+  output = ChallengeThree(output);
 
   return output;
 };
