@@ -41,6 +41,7 @@ function EstInfectionsByRequestedTime(currentInfections, timeToElapse, periodTyp
 }
 module.exports = {
   EstCurrentlyInfected,
-  EstInfectionsByRequestedTime
+  EstInfectionsByRequestedTime,
+  NormalisePeriodToDays
 
 };
