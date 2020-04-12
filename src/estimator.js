@@ -1,4 +1,5 @@
 const chaOne = require('./challenge1.js');
+const chaTwo = require('./challenge2.js');
 
 function ChallengeOne(output) {
   const ImpactCoeft = 10;
@@ -22,6 +23,33 @@ function ChallengeOne(output) {
   return output;
 }
 
+function ChallengeTwo(output) {
+  // Get total available hospital beds from input data
+  const totalBeds = output.data.totalHospitalBeds;
+  // Get estimated severe cases available bed
+  const totalSevCsBeds = chaTwo.EstAvailableBedforSevereCases(totalBeds);
+  // Get estimated impact InfectionsByRequestedTime
+  const impInfbyTime = output.estimate.impact.InfectionsByRequestedTime;
+  // Get estimated severe-impact InfectionsByRequestedTime
+  const sevImpInfbyTime = output.estimate.severeImpact.InfectionsByRequestedTime;
+  // estimate impact severecasesbyrequestedtime
+  const impSevCsByTime = chaTwo.EstSevereCasesByRequestedTime(impInfbyTime);
+  // estimate severe-impact severecasesbyrequestedtime
+  const sevImpSevCsByTime = chaTwo.EstSevereCasesByRequestedTime(sevImpInfbyTime);
+
+  const impBedRqTime = chaTwo.EstHospitalBedsByRequestedTime(totalSevCsBeds, impSevCsByTime);
+
+  const sevImpBedRqTime = chaTwo.EstHospitalBedsByRequestedTime(totalSevCsBeds, sevImpSevCsByTime);
+
+  // Assign values to output object.
+  output.estimate.impact.SevereCasesByRequestedTime = impSevCsByTime;
+  output.estimate.impact.HospitalBedsByRequestedTime = impBedRqTime;
+  output.estimate.severeImpact.SevereCasesByRequestedTime = sevImpSevCsByTime;
+  output.estimate.severeImpact.HospitalBedsByRequestedTime = sevImpBedRqTime;
+
+
+  return output;
+}
 // const covid19ImpactEstimator = (data) => data;
 
 const covid19ImpactEstimator = (data) => {
@@ -38,6 +66,8 @@ const covid19ImpactEstimator = (data) => {
   };
 
   output = ChallengeOne(output);
+
+  output = ChallengeTwo(output);
 
   return output;
 };
