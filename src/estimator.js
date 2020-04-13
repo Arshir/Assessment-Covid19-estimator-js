@@ -120,9 +120,9 @@ const covid19ImpactEstimator = (data) => {
   // Resolve challenge one
   output = ChallengeOne(output);
   // Resolve challenge two
- // output = ChallengeTwo(output);
+  output = ChallengeTwo(output);
   // Resolve challenge three
- // output = ChallengeThree(output);
+  output = ChallengeThree(output);
 
   return output;
 };
