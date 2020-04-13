@@ -23,7 +23,7 @@ function EstSevereCasesOnVentilators(infectionsByRequestedTime) {
 function EstMeasuresOfSevereCasesByRequestedTime(infectionsByRequestedTime, casePercentage) {
   if (Number.isInteger(infectionsByRequestedTime)) {
     // according to research, estimated severe cases by requested time
-    return parseInt(infectionsByRequestedTime * casePercentage, 10);
+    return infectionsByRequestedTime * casePercentage;
   }
   return 0;
 }
@@ -41,7 +41,7 @@ function EstDollarsInFlightOverRequestedPeriod(infectionsByRequestedTime, dailyI
     dollarsInFlight *= dailyIncomePopPercentage;
     dollarsInFlight *= dailyIncome;
     dollarsInFlight *= days;
-    dollarsInFlight = parseInt(dollarsInFlight, 10);
+    // dollarsInFlight = parseInt(dollarsInFlight, 10);
 
     return dollarsInFlight;
   }
