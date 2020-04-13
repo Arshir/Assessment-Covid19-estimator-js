@@ -11,7 +11,7 @@ function ChallengeOne(output) {
   const impInfected = chaOne.EstCurrentlyInfected(cases, ImpactCoeft);
   const sevInfected = chaOne.EstCurrentlyInfected(cases, SevereCoeft);
   // estimate infections by requested time
-  const time = output.data.period;
+  const time = output.data.timeToElapse;
   const timeUnit = output.data.periodType;
 
   const impInfbyTime = chaOne.EstInfectionsByRequestedTime(impInfected, time, timeUnit);
@@ -62,9 +62,11 @@ function ChallengeThree(output) {
   // Get estimated severe-impact InfectionsByRequestedTime
   const sevImpInfbyTime = output.estimate.severeImpact.InfectionsByRequestedTime;
   // Get avgDailyIncomeInUSD
-  const avgDailyIncome = output.data.avgDailyIncomeInUSD;
+  const avgDailyIncome = output.data.region.avgDailyIncomeInUSD;
   // Get avgDailyIncomePopulation
-  const avgDailyIncomePop = output.data.avgDailyIncomePopulation;
+  const avgDailyIncomePop = output.data.region.avgDailyIncomePopulation;
+  // Get days
+  const days = output.data.timeToElapse * chaOne.NormalisePeriodToDays(output.data.periodType);
   // Estimate severe cases of infections by requested time requiring icu
   const impSevCsByTimeVent = chaThree.EstMeasuresOfSevereCasesByRequestedTime(
     impInfbyTime, ventilatorCasesPercentage
@@ -84,12 +86,12 @@ function ChallengeThree(output) {
   );
   // Estimate Dollars Lost by infection impact
   const impdollarsInFlight = chaThree.EstDollarsInFlightOverRequestedPeriod(
-    impInfbyTime, avgDailyIncomePop, avgDailyIncome
+    impInfbyTime, avgDailyIncomePop, avgDailyIncome, days
   );
 
   // Estimate Dollars Lost by severe infection impact
   const sevImpdollarsInFlight = chaThree.EstDollarsInFlightOverRequestedPeriod(
-    sevImpInfbyTime, avgDailyIncomePop, avgDailyIncome
+    sevImpInfbyTime, avgDailyIncomePop, avgDailyIncome, days
   );
   // Assign values to output object.
   output.estimate.impact.casesForICUByRequestedTime = impSevCsByTimeICU;
@@ -115,14 +117,15 @@ const covid19ImpactEstimator = (data) => {
       severeImpact
     }
   };
-
+  // Resolve challenge one
   output = ChallengeOne(output);
-
+  // Resolve challenge two
   output = ChallengeTwo(output);
-
+  // Resolve challenge three
   output = ChallengeThree(output);
 
   return output;
 };
+
 
 export default covid19ImpactEstimator;
