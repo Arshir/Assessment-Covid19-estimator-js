@@ -41,7 +41,6 @@ function EstDollarsInFlightOverRequestedPeriod(infectionsByRequestedTime, dailyI
     dollarsInFlight *= dailyIncomePopPercentage;
     dollarsInFlight *= dailyIncome;
     dollarsInFlight *= days;
-    dollarsInFlight /= 100;
     dollarsInFlight = parseInt(dollarsInFlight, 10);
 
     return dollarsInFlight;
