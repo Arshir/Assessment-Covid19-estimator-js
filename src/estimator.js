@@ -1,7 +1,7 @@
 const chaOne = require('./challenge1.js');
-/* const chaTwo = require('./challenge2.js');
-const chaThree = require('./challenge3.js'); */
-
+const chaTwo = require('./challenge2.js');
+const chaThree = require('./challenge3.js');
+// Challleng 1 process
 function ChallengeOne(output) {
   const ImpactCoeft = 10;
   const SevereCoeft = 50;
@@ -23,16 +23,16 @@ function ChallengeOne(output) {
   output.severeImpact.infectionsByRequestedTime = sevInfbyTime;
   return output;
 }
-
-/* function ChallengeTwo(output) {
+// Challenge 2 process
+function ChallengeTwo(output) {
   // Get total available hospital beds from input data
   const totalBeds = output.data.totalHospitalBeds;
   // Get estimated severe cases available bed
   const totalSevCsBeds = chaTwo.EstAvailableBedforSevereCases(totalBeds);
   // Get estimated impact InfectionsByRequestedTime
-  const impInfbyTime = output.estimate.impact.InfectionsByRequestedTime;
+  const impInfbyTime = output.impact.infectionsByRequestedTime;
   // Get estimated severe-impact InfectionsByRequestedTime
-  const sevImpInfbyTime = output.estimate.severeImpact.InfectionsByRequestedTime;
+  const sevImpInfbyTime = output.severeImpact.infectionsByRequestedTime;
   // estimate impact severecasesbyrequestedtime
   const impSevCsByTime = chaTwo.EstSevereCasesByRequestedTime(impInfbyTime);
   // estimate severe-impact severecasesbyrequestedtime
@@ -43,24 +43,24 @@ function ChallengeOne(output) {
   const sevImpBedRqTime = chaTwo.EstHospitalBedsByRequestedTime(totalSevCsBeds, sevImpSevCsByTime);
 
   // Assign values to output object.
-  output.estimate.impact.SevereCasesByRequestedTime = impSevCsByTime;
-  output.estimate.impact.HospitalBedsByRequestedTime = impBedRqTime;
-  output.estimate.severeImpact.SevereCasesByRequestedTime = sevImpSevCsByTime;
-  output.estimate.severeImpact.HospitalBedsByRequestedTime = sevImpBedRqTime;
+  output.impact.severeCasesByRequestedTime = impSevCsByTime;
+  output.impact.hospitalBedsByRequestedTime = impBedRqTime;
+  output.severeImpact.severeCasesByRequestedTime = sevImpSevCsByTime;
+  output.severeImpact.hospitalBedsByRequestedTime = sevImpBedRqTime;
 
   return output;
-} */
-
-/* function ChallengeThree(output) {
+}
+// Challenge 3 process
+function ChallengeThree(output) {
   // Percentage measure of severe cases requiring ventilator according to research
   const ventilatorCasesPercentage = 0.02;
   // Percentage measure of severe cases requiring intensive care
   const icuCasesPercentage = 0.05;
 
   // Get estimated impact InfectionsByRequestedTime
-  const impInfbyTime = output.estimate.impact.InfectionsByRequestedTime;
+  const impInfbyTime = output.impact.infectionsByRequestedTime;
   // Get estimated severe-impact InfectionsByRequestedTime
-  const sevImpInfbyTime = output.estimate.severeImpact.InfectionsByRequestedTime;
+  const sevImpInfbyTime = output.severeImpact.infectionsByRequestedTime;
   // Get avgDailyIncomeInUSD
   const avgDailyIncome = output.data.region.avgDailyIncomeInUSD;
   // Get avgDailyIncomePopulation
@@ -94,14 +94,14 @@ function ChallengeOne(output) {
     sevImpInfbyTime, avgDailyIncomePop, avgDailyIncome, days
   );
   // Assign values to output object.
-  output.estimate.impact.casesForICUByRequestedTime = impSevCsByTimeICU;
-  output.estimate.impact.casesForVentilatorsByRequestedTime = impSevCsByTimeVent;
-  output.estimate.impact.dollarsInFlight = impdollarsInFlight;
-  output.estimate.severeImpact.casesForICUByRequestedTime = sevImpSevCsByTimeICU;
-  output.estimate.severeImpact.casesForVentilatorsByRequestedTime = sevImpSevCsByTimeVent;
-  output.estimate.severeImpact.dollarsInFlight = sevImpdollarsInFlight;
+  output.impact.casesForICUByRequestedTime = impSevCsByTimeICU;
+  output.impact.casesForVentilatorsByRequestedTime = impSevCsByTimeVent;
+  output.impact.dollarsInFlight = impdollarsInFlight;
+  output.severeImpact.casesForICUByRequestedTime = sevImpSevCsByTimeICU;
+  output.severeImpact.casesForVentilatorsByRequestedTime = sevImpSevCsByTimeVent;
+  output.severeImpact.dollarsInFlight = sevImpdollarsInFlight;
   return output;
-} */
+}
 
 // const covid19ImpactEstimator = (data) => data;
 
@@ -118,9 +118,9 @@ const covid19ImpactEstimator = (data) => {
   // Resolve challenge one
   output = ChallengeOne(output);
   // Resolve challenge two
-  // output = ChallengeTwo(output);
+  output = ChallengeTwo(output);
   // Resolve challenge three
-  // output = ChallengeThree(output);
+  output = ChallengeThree(output);
 
   return output;
 };
