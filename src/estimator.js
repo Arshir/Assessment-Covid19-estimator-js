@@ -17,10 +17,10 @@ function ChallengeOne(output) {
   const impInfbyTime = chaOne.EstInfectionsByRequestedTime(impInfected, time, timeUnit);
   const sevInfbyTime = chaOne.EstInfectionsByRequestedTime(sevInfected, time, timeUnit);
   // Assign values to output object.
-  output.impact.currentlyInfected = impInfected;
-  output.impact.infectionsByRequestedTime = impInfbyTime;
-  output.severeImpact.currentlyInfected = sevInfected;
-  output.severeImpact.infectionsByRequestedTime = sevInfbyTime;
+  output.impact.currentlyInfected = Number.parseInt(impInfected, 10);
+  output.impact.infectionsByRequestedTime = Number.parseInt(impInfbyTime, 10);
+  output.severeImpact.currentlyInfected = Number.parseInt(sevInfected, 10);
+  output.severeImpact.infectionsByRequestedTime = Number.parseInt(sevInfbyTime, 10);
   return output;
 }
 // Challenge 2 process
@@ -37,16 +37,14 @@ function ChallengeTwo(output) {
   const impSevCsByTime = chaTwo.EstSevereCasesByRequestedTime(impInfbyTime);
   // estimate severe-impact severecasesbyrequestedtime
   const sevImpSevCsByTime = chaTwo.EstSevereCasesByRequestedTime(sevImpInfbyTime);
-
   const impBedRqTime = chaTwo.EstHospitalBedsByRequestedTime(totalSevCsBeds, impSevCsByTime);
-
   const sevImpBedRqTime = chaTwo.EstHospitalBedsByRequestedTime(totalSevCsBeds, sevImpSevCsByTime);
 
   // Assign values to output object.
-  output.impact.severeCasesByRequestedTime = impSevCsByTime;
-  output.impact.hospitalBedsByRequestedTime = impBedRqTime;
-  output.severeImpact.severeCasesByRequestedTime = sevImpSevCsByTime;
-  output.severeImpact.hospitalBedsByRequestedTime = sevImpBedRqTime;
+  output.impact.severeCasesByRequestedTime = Number.parseInt(impSevCsByTime, 10);
+  output.impact.hospitalBedsByRequestedTime = Number.parseInt(impBedRqTime, 10);
+  output.severeImpact.severeCasesByRequestedTime = Number.parseInt(sevImpSevCsByTime, 10);
+  output.severeImpact.hospitalBedsByRequestedTime = Number.parseInt(sevImpBedRqTime, 10);
 
   return output;
 }
@@ -94,12 +92,14 @@ function ChallengeThree(output) {
     sevImpInfbyTime, avgDailyIncomePop, avgDailyIncome, days
   );
   // Assign values to output object.
-  output.impact.casesForICUByRequestedTime = impSevCsByTimeICU;
-  output.impact.casesForVentilatorsByRequestedTime = impSevCsByTimeVent;
-  output.impact.dollarsInFlight = impdollarsInFlight;
-  output.severeImpact.casesForICUByRequestedTime = sevImpSevCsByTimeICU;
-  output.severeImpact.casesForVentilatorsByRequestedTime = sevImpSevCsByTimeVent;
-  output.severeImpact.dollarsInFlight = sevImpdollarsInFlight;
+  output.impact.casesForICUByRequestedTime = Number.parseInt(impSevCsByTimeICU, 10);
+  output.impact.casesForVentilatorsByRequestedTime = Number.parseInt(impSevCsByTimeVent, 10);
+  output.impact.dollarsInFlight = Number.parseInt(impdollarsInFlight, 10);
+  output.severeImpact.casesForICUByRequestedTime = Number.parseInt(sevImpSevCsByTimeICU, 10);
+  output.severeImpact.casesForVentilatorsByRequestedTime = Number.parseInt(
+    sevImpSevCsByTimeVent, 10
+  );
+  output.severeImpact.dollarsInFlight = Number.parseInt(sevImpdollarsInFlight, 10);
   return output;
 }
 
@@ -125,4 +125,18 @@ const covid19ImpactEstimator = (data) => {
   return output;
 };
 
-export default covid19ImpactEstimator;
+const data = {
+  region: {
+    name: 'Africa',
+    avgAge: 19.7,
+    avgDailyIncomeInUSD: 4,
+    avgDailyIncomePopulation: 0.73
+  },
+  periodType: 'days',
+  timeToElapse: 38,
+  reportedCases: 2747,
+  population: 92931687,
+  totalHospitalBeds: 678874
+};
+
+console.log(covid19ImpactEstimator(data));
