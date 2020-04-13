@@ -1,14 +1,9 @@
 // Estimate the number of currently infected people based on impact level
 function EstCurrentlyInfected(reportedCases, impactFactor) {
-  const cases = parseInt(reportedCases, 10);
-  const factor = parseInt(impactFactor, 10);
-  // Check for numeric compatible values
-  if (!Number.isNaN(cases) && !Number.isNaN(factor)) {
-    // estimate current infection figure
-    return cases * factor; // formular: reportedCases x severityImpactFactor
-  }
-  return 0; // Return zero(0) if argument values are not convertible to numbers
+  // estimate current infection figure
+  return reportedCases * impactFactor; // formular: reportedCases x severityImpactFactor
 }
+
 // Get the number of days making up the period
 function NormalisePeriodToDays(periodType) {
   let days = 0;
@@ -37,7 +32,7 @@ function EstInfectionsByRequestedTime(currentInfections, timeToElapse, periodTyp
   if (Number.isSafeInteger(currentInfections) && Number.isSafeInteger(timeToElapse) && days > 0) {
     const requestedTime = days * timeToElapse; // days of equivalent
     // estimate frequency of infections double at interval of 3 days
-    const doublingFreq = parseInt(requestedTime / 3, 10);
+    const doublingFreq = Number.parseInt(requestedTime / 3, 10);
     return currentInfections * (2 ** doublingFreq);
   }
   return 0;
