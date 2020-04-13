@@ -17,10 +17,10 @@ function ChallengeOne(output) {
   const impInfbyTime = chaOne.EstInfectionsByRequestedTime(impInfected, time, timeUnit);
   const sevInfbyTime = chaOne.EstInfectionsByRequestedTime(sevInfected, time, timeUnit);
   // Assign values to output object.
-  output.estimate.impact.CurrentlyInfected = impInfected;
-  output.estimate.impact.InfectionsByRequestedTime = impInfbyTime;
-  output.estimate.severeImpact.CurrentlyInfected = sevInfected;
-  output.estimate.severeImpact.InfectionsByRequestedTime = sevInfbyTime;
+  output.estimate.impact.currentlyInfected = impInfected;
+  output.estimate.impact.infectionsByRequestedTime = impInfbyTime;
+  output.estimate.severeImpact.currentlyInfected = sevInfected;
+  output.estimate.severeImpact.infectionsByRequestedTime = sevInfbyTime;
   return output;
 }
 
