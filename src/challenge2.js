@@ -20,7 +20,6 @@ function EstAvailableBedforSevereCases(totalNumberofHospitalBeds) {
 }
 // Estimate remaining number of available bed after severe cases hospitalization
 function EstHospitalBedsByRequestedTime(severeCasesAvailableBed, severeCasesByRequestedTime) {
-
   if (Number.parseInt(severeCasesAvailableBed, 10) >= 0
   && Number.parseInt(severeCasesByRequestedTime, 10) >= 0) {
     return (severeCasesAvailableBed - severeCasesByRequestedTime);
