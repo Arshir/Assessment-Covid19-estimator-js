@@ -12,7 +12,7 @@ function EstCurrentlyInfected(reportedCases, impactFactor) {
 // Get the number of days making up the period
 function NormalisePeriodToDays(periodType) {
   let days = 0;
-  switch (String.toLowerCase(periodType)) {
+  switch (periodType.toLowerCase()) {
     case 'weeks':
       days = 7; // 7 days in a week
       break;
@@ -22,8 +22,11 @@ function NormalisePeriodToDays(periodType) {
     case 'years':
       days = 365; // 365 days in year (assuming not a leap year)
       break;
-    default:
+    case 'days':
       days = 1; // 1 day in day
+      break;
+    default:
+      days = 0;
   }
   return days;
 }
