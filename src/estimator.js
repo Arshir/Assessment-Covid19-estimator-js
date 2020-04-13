@@ -1,6 +1,6 @@
 const chaOne = require('./challenge1.js');
-const chaTwo = require('./challenge2.js');
-const chaThree = require('./challenge3.js');
+/* const chaTwo = require('./challenge2.js');
+const chaThree = require('./challenge3.js'); */
 
 function ChallengeOne(output) {
   const ImpactCoeft = 10;
@@ -24,7 +24,7 @@ function ChallengeOne(output) {
   return output;
 }
 
-function ChallengeTwo(output) {
+/* function ChallengeTwo(output) {
   // Get total available hospital beds from input data
   const totalBeds = output.data.totalHospitalBeds;
   // Get estimated severe cases available bed
@@ -49,9 +49,9 @@ function ChallengeTwo(output) {
   output.estimate.severeImpact.HospitalBedsByRequestedTime = sevImpBedRqTime;
 
   return output;
-}
+} */
 
-function ChallengeThree(output) {
+/* function ChallengeThree(output) {
   // Percentage measure of severe cases requiring ventilator according to research
   const ventilatorCasesPercentage = 0.02;
   // Percentage measure of severe cases requiring intensive care
@@ -101,7 +101,7 @@ function ChallengeThree(output) {
   output.estimate.severeImpact.casesForVentilatorsByRequestedTime = sevImpSevCsByTimeVent;
   output.estimate.severeImpact.dollarsInFlight = sevImpdollarsInFlight;
   return output;
-}
+} */
 
 // const covid19ImpactEstimator = (data) => data;
 
@@ -120,12 +120,11 @@ const covid19ImpactEstimator = (data) => {
   // Resolve challenge one
   output = ChallengeOne(output);
   // Resolve challenge two
-  output = ChallengeTwo(output);
+  // output = ChallengeTwo(output);
   // Resolve challenge three
-  output = ChallengeThree(output);
+  // output = ChallengeThree(output);
 
   return output;
 };
-
 
 export default covid19ImpactEstimator;
