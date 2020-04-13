@@ -106,15 +106,15 @@ function ChallengeOne(output) {
 // const covid19ImpactEstimator = (data) => data;
 
 const covid19ImpactEstimator = (data) => {
-  const input = data;
-  const impact = {};
-  const severeImpact = {};
+  // const input = data;
+  // const impact = {};
+  // const severeImpact = {};
 
   let output = {
-    data: input,
+    data,
     estimate: {
-      impact,
-      severeImpact
+      impact: {},
+      severeImpact: {}
     }
   };
   // Resolve challenge one
