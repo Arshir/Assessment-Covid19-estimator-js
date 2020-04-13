@@ -17,10 +17,10 @@ function ChallengeOne(output) {
   const impInfbyTime = chaOne.EstInfectionsByRequestedTime(impInfected, time, timeUnit);
   const sevInfbyTime = chaOne.EstInfectionsByRequestedTime(sevInfected, time, timeUnit);
   // Assign values to output object.
-  output.estimate.impact.currentlyInfected = impInfected;
-  output.estimate.impact.infectionsByRequestedTime = impInfbyTime;
-  output.estimate.severeImpact.currentlyInfected = sevInfected;
-  output.estimate.severeImpact.infectionsByRequestedTime = sevInfbyTime;
+  output.impact.currentlyInfected = impInfected;
+  output.impact.infectionsByRequestedTime = impInfbyTime;
+  output.severeImpact.currentlyInfected = sevInfected;
+  output.severeImpact.infectionsByRequestedTime = sevInfbyTime;
   return output;
 }
 
@@ -112,10 +112,8 @@ const covid19ImpactEstimator = (data) => {
 
   let output = {
     data,
-    estimate: {
-      impact: {},
-      severeImpact: {}
-    }
+    impact: {},
+    severeImpact: {}
   };
   // Resolve challenge one
   output = ChallengeOne(output);
