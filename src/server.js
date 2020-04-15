@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 // import xml parser
 const xml = require('xml2js');
 // import estimator method
-const estimator = require('./estimator.js');
+const estimator = require('./estimator1.js');
+
 
 const builder = new xml.Builder({
   renderOpts: { pretty: false }

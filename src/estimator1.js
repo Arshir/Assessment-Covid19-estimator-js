@@ -105,7 +105,7 @@ function ChallengeThree(output) {
 
 // const covid19ImpactEstimator = (data) => data;
 
-const covid19ImpactEstimator = (data) => {
+function covid19ImpactEstimator(data) {
   // const input = data;
   // const impact = {};
   // const severeImpact = {};
@@ -123,6 +123,8 @@ const covid19ImpactEstimator = (data) => {
   output = ChallengeThree(output);
 
   return output;
-};
+}
 
-export default covid19ImpactEstimator;
+module.exports = {
+  covid19ImpactEstimator
+};
